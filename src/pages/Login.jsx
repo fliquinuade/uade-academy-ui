@@ -51,7 +51,7 @@ export default function Login() {
           className="border w-full p-2 mb-2"
           name="email"
           type="text"
-          placeholder="Email"
+          placeholder="Ingrese Email"
           value={form.email}
           onChange={handle}
         />
