@@ -12,7 +12,7 @@ export default function Login() {
   const location = useLocation();
 
   // Estado para los campos del formulario
-  const [form, setForm] = useState({ username: "", password: "" });
+  const [form, setForm] = useState({ email: "", password: "" });
   // Estado para mostrar errores de autenticación
   const [error, setError] = useState("");
 
@@ -49,10 +49,10 @@ export default function Login() {
         {/* Campo de username */}
         <input
           className="border w-full p-2 mb-2"
-          name="username"
+          name="email"
           type="text"
-          placeholder="Nombre de usuario"
-          value={form.username}
+          placeholder="Email"
+          value={form.email}
           onChange={handle}
         />
         {/* Campo de contraseña */}

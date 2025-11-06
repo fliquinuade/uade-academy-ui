@@ -36,15 +36,15 @@ export function clearTokens(){
 }
 
 // Función que obtiene los tokens (access y refresh)
-export async function loginWithTokens(username,password){
-    console.log('Iniciando proceso de login para: ',username);
+export async function loginWithTokens(email,password){
+    console.log('Iniciando proceso de login para: ',email);
 
     try{
         // Paso 1: Enviar credenciales al servicio de autenticacion
         const response =  await fetch(AUTH_URL, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username, password })
+            body: JSON.stringify({ email, password })
         });
 
         // Paso 2: Verificar si las credenciales son correctas
