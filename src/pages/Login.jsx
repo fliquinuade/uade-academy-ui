@@ -46,7 +46,7 @@ export default function Login() {
         {/* Mensaje de error si existe */}
         {error && <p className="text-red-500 mb-2">{error}</p>}
 
-        {/* Campo de username */}
+        {/* Campo de email */}
         <input
           className="border w-full p-2 mb-2"
           name="email"

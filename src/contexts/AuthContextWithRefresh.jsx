@@ -31,9 +31,9 @@ export function AuthProviderWithRefresh({ children }) {
     }, [setToken,setRefreshToken]);
 
     // Funcion login para autenticar con credenciales de usuario/constraseña
-    const login = useCallback(async({username, password}) =>{
+    const login = useCallback(async({email, password}) =>{
         // Delegamos al servicio la comunicación con el backend
-        const result = await tokenService.loginWithTokens(username,password);
+        const result = await tokenService.loginWithTokens(email,password);
         if( result.success ){
             //Desde el context no necesito almacenar en el storage, ya lo hace el servicio
             //Debo actualizar los estados
