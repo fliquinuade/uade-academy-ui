@@ -2,8 +2,8 @@ import * as tokenService from '../services/tokenService'
 
 // const BASE_URL = 'https://68d05d6bec1a5ff3382718f5.mockapi.io/api/courses';
 const BASE_URL = import.meta.env.VITE_API_URL ?
-                    `${import.meta.env.VITE_API_URL}/cursos/` :
-                    'http://127.0.0.1:8000/api/cursos/';
+                    `${import.meta.env.VITE_API_URL}/cursos` :
+                    'http://127.0.0.1:8000/api/cursos';
 
 /**
  * Funcion auxiliar para hacer las peticiones API-REST
