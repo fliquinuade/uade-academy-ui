@@ -1,9 +1,21 @@
 import { Link } from "react-router";
 import { CourseCard } from '../components/CourseCard'
 import { ContactForm } from '../components/ContactForm'
-import courses from '../data/courses'
+import { useCoursesFilter } from '../hooks/useCoursesFilter'
 
 export function Home(){
+    const { courses, isLoading: loading, error, filters, updatedFilter } = useCoursesFilter();
+    
+    const levels = [
+        { label: "Todos", value: "" },
+        { label: "Básicos", value: "basico" },
+        { label: "Intermedios", value: "intermedio" },
+        { label: "Avanzados", value: "avanzado" }
+    ];
+    
+    const handleLevelFilter = (level) => {
+        updatedFilter('level', level);
+    };
         
     return (
         
@@ -72,22 +84,41 @@ export function Home(){
 
                 {/* Filtros (estáticos) */}
                 <div className="mt-8 flex flex-wrap items-center justify-center gap-2">
-                    {["Todos", "Básicos", "Intermedios", "Avanzados"].map((f, i) => (
+                    {levels.map((levelOption) => (
                         <button
-                            key={f}
+                            key={levelOption.value}
+                            onClick={() => handleLevelFilter(levelOption.value)}
                             className={
-                                "rounded-full px-4 py-2 text-sm ring-1 ring-white/15 hover:bg-white/10 " +
-                                (i === 0 ? "bg-white/10" : "bg-transparent")
+                                "rounded-full px-4 py-2 text-sm ring-1 ring-white/15 hover:bg-white/10 transition-colors " +
+                                (filters.level === levelOption.value ? "bg-white/10" : "bg-transparent")
                             }
                         >
-                            {f}
+                            {levelOption.label}
                         </button>
                     ))}
                 </div>
 
                 {/* Grid de piezas */}
                 <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                    {courses.map((c) => (
+                    {loading && (
+                        <div className="col-span-full text-center py-10">
+                            <p className="text-slate-300">Cargando cursos...</p>
+                        </div>
+                    )}
+                    
+                    {error && (
+                        <div className="col-span-full text-center py-10">
+                            <p className="text-red-400">Error al cargar los cursos. Por favor, intentá nuevamente.</p>
+                        </div>
+                    )}
+                    
+                    {!loading && !error && courses.length === 0 && (
+                        <div className="col-span-full text-center py-10">
+                            <p className="text-slate-300">No hay cursos disponibles en este momento.</p>
+                        </div>
+                    )}
+                    
+                    {!loading && !error && courses.map((c) => (
                         <CourseCard 
                             key={c.id} 
                             id={c.id}

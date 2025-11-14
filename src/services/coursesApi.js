@@ -133,9 +133,18 @@ export function getCourses(){
     return requestWithRefresh();
 }
 
+// export function getCoursesWithFilters(filters={}){
+//     const path = `?name=${filters.name}&level=${filters.level}`;
+//     return requestWithRefresh(path);
+// }
+
 export function getCoursesWithFilters(filters={}){
-    const path = `?name=${filters.name}&level=${filters.level}`;
-    return requestWithRefresh(path);
+    // Construir query parameters de forma segura
+    const params = new URLSearchParams();
+    if (filters.name) params.append('name', filters.name);
+    if (filters.level) params.append('level', filters.level);
+    const query = params.toString() ? `?${params.toString()}` : '';
+    return requestWithRefresh(query);
 }
 
 /**
